@@ -7,4 +7,9 @@ Seek to create a program that allows the users to select points on a map then ha
   Failed to open map in GUI using TKinter [here](tkinter_version.py)
 
 ## Version 0.2 - PyQt5
-  Successfully rendered map in GUI using PyQt5 [here](PyQt5_version.py)
+  Successfully rendered map in GUI using PyQt5
+
+## Version 0.3 - Window Split
+  Tested adding second panel for input fields [here](Split_test.py)
+
+  Added functionality to main program [here](PyQt5_version.py)
