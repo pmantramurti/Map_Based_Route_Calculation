@@ -3,6 +3,7 @@ Seek to create a program that allows the users to select points on a map then ha
 
 ## Version 0.1 - TKinter
   Successfully generated map file [here](map.html)
+  
   Failed to open map in GUI using TKinter [here](tkinter_version.py)
 
 ## Version 0.2 - PyQt5
