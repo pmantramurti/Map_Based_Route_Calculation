@@ -11,12 +11,12 @@ class Map_Window(QMainWindow):
         super().__init__()
         self.setWindowTitle("Route Calculator")
         self.setGeometry(100, 100, 1200, 600)
+        self.setFixedSize(1200, 600)
 
-        #splitter = QSplitter(Qt.Horizontal, self)
-        #self.setCentralWidget(splitter)
+        splitter = QSplitter(Qt.Horizontal, self)
+        self.setCentralWidget(splitter)
 
         self.web_view = QWebEngineView()
-        self.setCentralWidget(self.web_view)
         current_dir = os.path.dirname(os.path.abspath(__file__))
         html_file_path = os.path.join(current_dir, 'map.html')
 
@@ -27,11 +27,17 @@ class Map_Window(QMainWindow):
         self.web_view.setUrl(QUrl.fromLocalFile(html_file_path))
         QTimer.singleShot(2000, self.check_loading_status)
 
-        placeholder_widget = QWidget()
-        placeholder_widget.setStyleSheet("background-color: lightblue;")
-        #splitter.addWidget(self.web_view)
-        #splitter.addWidget(placeholder_widget)
-        #splitter.setSizes([800, 400])
+        self.web_view.setMinimumSize(800, 600)
+        self.web_view.setMaximumSize(800, 600)
+        splitter.addWidget(self.web_view)
+
+        section2_widget = QWidget()
+        section2_widget.setStyleSheet("background-color: lightblue;")
+        section2_widget.setMinimumSize(400, 600)
+        section2_widget.setMaximumSize(400, 600)
+        splitter.addWidget(section2_widget)
+
+        splitter.setSizes([800, 400])
 
     def check_loading_status(self):
         print("Loading Map...")
