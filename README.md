@@ -2,7 +2,7 @@
 Seek to create a program that allows the users to select points on a map then have a drone route between them generated.
 
 ![Example Design](archive/Assignment_1.png)
-
+<img src="archive/Assignment_1.png" width="48">
 ## Version 0.1 - TKinter
   Successfully generated map file [here](map.html)
   
