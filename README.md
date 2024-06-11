@@ -15,3 +15,8 @@ Seek to create a program that allows the users to select points on a map then ha
   Tested adding second panel for input fields [here](archive/Split_test.py)
 
   Added functionality to main program [here](archive/markers_v0-3.py)
+
+## Version 0.4 - Adding Markers
+  Program now allows for adding points to map, save points as array of coordinates for future operations.
+
+  See [here](markers_v0-4.py)
