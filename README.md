@@ -14,4 +14,4 @@ Seek to create a program that allows the users to select points on a map then ha
 ## Version 0.3 - Window Split
   Tested adding second panel for input fields [here](archive/Split_test.py)
 
-  Added functionality to main program [here](PyQt5_version.py)
+  Added functionality to main program [here](archive/markers_v0-3.py)
