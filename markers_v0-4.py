@@ -4,7 +4,7 @@ import sys
 import json
 from PyQt5.QtCore import Qt
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtWidgets import QApplication, QSplitter, QWidget, QMainWindow, QPushButton, QGridLayout, QFileDialog
+from PyQt5.QtWidgets import QApplication, QSplitter, QWidget, QMainWindow, QPushButton, QGridLayout, QMessageBox
 from folium.plugins import Draw
 
 current_folder = os.path.dirname(os.path.abspath(__file__))
@@ -17,10 +17,21 @@ def handle_downloadRequested(item):
         item.accept()
 
 
+def showErrorPopup(error, message):
+    msgBox = QMessageBox()
+    msgBox.setIcon(QMessageBox.Critical)
+    msgBox.setText(error)
+    msgBox.setInformativeText(message)
+    msgBox.setWindowTitle("Error")
+    msgBox.setStandardButtons(QMessageBox.Ok)
+    msgBox.exec_()
+
+
 class Map_Window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.points = None
+        self.markers = []
         self.setWindowTitle("Route Calculator")
         self.setGeometry(100, 100, 1200, 600)
         self.setFixedSize(1400, 600)
@@ -70,8 +81,7 @@ class Map_Window(QMainWindow):
                 if (exportButton) {
                     exportButton.style.display = 'none';
                 }
-            }
-        ''')
+            }''')
 
     def get_marker_data(self):
         self.web_view.page().runJavaScript('''
@@ -80,16 +90,19 @@ class Map_Window(QMainWindow):
                         exportButton.style.display = 'none';
                         exportButton.click();
                     }''')
-        with open('markers.json', 'r') as f:
-            data = json.load(f)
-        if len(data['features']) > 0:
-            coordinates = [feature['geometry']['coordinates'] for feature in data['features']]
-            longitudes, latitudes = zip(*coordinates)
-            self.points = [list(latitudes), list(longitudes)]
-            self.web_view.setHtml(self.map._repr_html_())
-            self.get_marker_order()
+        if os.path.isfile('markers.json'):
+            with open('markers.json', 'r') as f:
+                data = json.load(f)
+            if len(data['features']) > 0:
+                coordinates = [feature['geometry']['coordinates'] for feature in data['features']]
+                longitudes, latitudes = zip(*coordinates)
+                self.points = [list(latitudes), list(longitudes)]
+                self.web_view.setHtml(self.map._repr_html_())
+                self.get_marker_order()
+            else:
+                showErrorPopup('No points selected', 'Please add points first, then press export again.')
         else:
-            print('Please press export first.')
+            showErrorPopup('File not found', 'Please press export first.')
 
     def get_marker_order(self):
         for lat, long in zip(self.points[0], self.points[1]):
