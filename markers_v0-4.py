@@ -92,7 +92,6 @@ class Map_Window(QMainWindow):
             print('Please press export first.')
 
     def get_marker_order(self):
-        print(self.points)
         for lat, long in zip(self.points[0], self.points[1]):
             print(lat, long)
             # order_layout = QGridLayout()
