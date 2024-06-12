@@ -1,3 +1,14 @@
+# HOW TO RUN
+# Ensure environment has required packages installed
+# run python markers_v0.5.py
+# place markers on map, then hit export, then hit Get Marker Data
+# Select Yes, marker reorder not functional yet
+# enter pertinent details for each point, hit confirm 
+# After last point, window will generate route from first to last points
+#
+# TODO - Option to reorder points, option to loop to first point/revisit points, generate and save trajectory and timestamps 
+# at end of program
+
 import copy
 import time
 
